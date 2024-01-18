@@ -14,12 +14,17 @@ public class Main {
     public static void main(String[] args) {
         logger.info("** Starting Maze Runner");
         Options options = new Options();
-        options.addOption("i", true, "input filepath");
+        options.addOption("i", true, "input maze filepath");
+        options.addOption("p", true, "user path guess");
+
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
             String inputFilePath = cmd.getOptionValue("i");
-            logger.info("**** Reading the maze from file " + args[0]);
+            String userPath = cmd.getOptionValue("p");
+            logger.info(userPath);
+
+            logger.info("**** Reading the maze from file " + inputFilePath);
             BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -33,7 +38,7 @@ public class Main {
                 System.out.print(System.lineSeparator());
             }
         } catch(Exception e) {
-            System.err.println("/!\\ An error has occured /!\\");
+            logger.info("/!\\ An error has occured /!\\");
         }
         logger.info("**** Computing path");
         logger.info("PATH NOT COMPUTED");
