@@ -21,12 +21,16 @@ public class Main {
         options.addOption("p", true, "user path guess");
 
         ArrayList<ArrayList<String>> userMaze = new ArrayList<ArrayList<String>>();
+        String userPath= "";
 
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(options, args);
             String inputFilePath = cmd.getOptionValue("i");
-            String userPath = cmd.getOptionValue("p");
+            if(cmd.hasOption("p")) {
+                    userPath = cmd.getOptionValue("p");
+            }
+            
             logger.info(userPath);
 
             logger.info("**** Reading the maze from file " + inputFilePath);
@@ -58,6 +62,7 @@ public class Main {
 
         logger.info("**** Computing path");
         logger.info("Path: " + mazeTest.findCanonicalPath());
+        logger.info("Verify User Path: " + mazeTest.checkPath(userPath));
         logger.info("** End of MazeRunner");
         
         
