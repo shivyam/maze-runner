@@ -11,9 +11,18 @@ public class Maze{
 
     }
 
+    //returns the row from the first column that the entry tile is located on
     public int findEntryTile(){
-        return 1;
+        for (int i=0;i<maze.size();i++){
+            ArrayList<String> row = new ArrayList<String>(maze.get(i));
+
+            if (row.get(0).equals("PASS ")){
+                return i;
+            }
+        }
+        return 0;
     }
+
 
     //finds path in the form "FFFRRFFLLF"
     public String findCanonicalPath(){

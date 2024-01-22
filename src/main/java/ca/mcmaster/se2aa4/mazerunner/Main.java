@@ -57,8 +57,9 @@ public class Main {
         Maze mazeTest= new Maze(userMaze);
 
         logger.info("**** Computing path");
-        logger.info(mazeTest.findCanonicalPath());
+        logger.info("Path: " + mazeTest.findCanonicalPath());
         logger.info("** End of MazeRunner");
+        
         
     }
 }
