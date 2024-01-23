@@ -3,6 +3,8 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+
+public 
 public class FindPath{
 
    //returns the row from the first column that the entry tile is located on
