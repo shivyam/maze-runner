@@ -1,31 +1,33 @@
 package ca.mcmaster.se2aa4.mazerunner;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
-public 
 public class FindPath{
 
+    public Maze dummyMaze;
+
+
+    public FindPath(Maze maze){
+        this.dummyMaze= maze;
+    }
+
+
+
    //returns the row from the first column that the entry tile is located on
-    public int findEntryTile(){
-        for (int i=0;i<maze.size();i++){
-            ArrayList<String> row = new ArrayList<String>(maze.get(i));
-
-            if (row.get(0).equals("PASS ")){
-                return i;
-            }
-        }
-        return 0;
-    }
-
-
     //finds path in the form "FFFRRFFLLF"
-    public String findCanonicalPath(Maze userMaze){
+    public String findCanonicalPath(){
+        
         String path="";
-        return "FFFFFFFFFFFFFFFFFFFLLLLLL";
-    }
+        int start= dummyMaze.findEntryTile();
+        int end = dummyMaze.findExitTile();
+        int width= dummyMaze.getWidth();
+        //while()
 
+        return "FFFFFFFFFFFFFFFFFFFLLLLLL";
+    }    
+    
+
+    
     //uses findCanonicalPath method to find maze path, then outputs path in the form "3F2R2F2LF"
     public String findFactorizedPath(){
         String path = findCanonicalPath();

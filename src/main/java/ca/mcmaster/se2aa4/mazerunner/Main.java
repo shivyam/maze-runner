@@ -60,9 +60,11 @@ public class Main {
         }
 
         Maze mazeTest= new Maze(userMaze);
+        FindPath path= new FindPath(mazeTest);
+        
         
         logger.info("**** Computing path");
-        logger.info("Path: " + mazeTest.findFactorizedPath());
+        logger.info("Path: " + path.findFactorizedPath());
         logger.info(mazeTest.findEntryTile());
         //logger.info("Verify User Path: " + mazeTest.checkPath(userPath));
         logger.info("** End of MazeRunner");

@@ -6,12 +6,44 @@ import java.util.Arrays;
 public class Maze{
 
     private ArrayList<ArrayList<String>> maze= new ArrayList<ArrayList<String>>();
+    private int width;
 
     public Maze(ArrayList<ArrayList<String>> userMaze){
         maze= new ArrayList<ArrayList<String>>(userMaze);
-
     }
 
+    public ArrayList<ArrayList<String>> getMaze(){
+        return maze;
+    }
+
+    public int getWidth(){
+        if (maze.size()>0){
+            return maze.get(0).size();
+        }
+        return -1;
+    }
+
+    public int findExitTile(){
+        for (int i=0;i<maze.size();i++){
+            ArrayList<String> row = new ArrayList<String>(maze.get(i));
+
+            if (row.get(row.size()-1).equals("PASS ")){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public int findEntryTile(){
+        for (int i=0;i<maze.size();i++){
+            ArrayList<String> row = new ArrayList<String>(maze.get(i));
+
+            if (row.get(0).equals("PASS ")){
+                return i;
+            }
+        }
+        return 0;
+    }
 
     
 
