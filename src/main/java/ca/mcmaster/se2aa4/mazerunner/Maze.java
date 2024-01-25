@@ -2,16 +2,51 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 public class Maze{
 
     private ArrayList<ArrayList<String>> maze= new ArrayList<ArrayList<String>>();
+    private int width;
 
     public Maze(ArrayList<ArrayList<String>> userMaze){
         maze= new ArrayList<ArrayList<String>>(userMaze);
-
     }
 
-    //returns the row from the first column that the entry tile is located on
+    public ArrayList<ArrayList<String>> getMaze(){
+        return maze;
+    }
+
+    //to aid with finding maze path
+    public int getWidth(){
+        if (maze.size()>0){
+            return maze.get(0).size();
+        }
+        return -1;
+    }
+
+    public int getHeight(){
+        if (maze.size()>0){
+            return maze.size();
+        }
+        return -1;
+    }
+
+    public String getTile(int rowIndex, int columnIndex){
+        ArrayList<String> row= new ArrayList<>(maze.get(rowIndex));
+        return row.get(columnIndex);
+    }
+    
+    public int findExitTile(){
+        for (int i=0;i<maze.size();i++){
+            ArrayList<String> row = new ArrayList<String>(maze.get(i));
+
+            if (row.get(row.size()-1).equals("PASS ")){
+                return i;
+            }
+        }
+        return 0;
+    }
+
     public int findEntryTile(){
         for (int i=0;i<maze.size();i++){
             ArrayList<String> row = new ArrayList<String>(maze.get(i));
@@ -23,67 +58,7 @@ public class Maze{
         return 0;
     }
 
-
-    //finds path in the form "FFFRRFFLLF"
-    public String findCanonicalPath(){
-        String path="";
-        return "FFFF";
-    }
-
-    //outputs path in the form "3F2R2F2LF"
-    public String findFactorizedPath(){
-        return "4F";
-    }
-
-
-    public ArrayList<String> convertUserPath(String userPath){
-        String path = userPath.replaceAll("\\s", "");
-        String[] path_arr= path.split("");
-        ArrayList<String> canonicalPath= new ArrayList<>();
-        int repetition=1;
-
-        for(int i=0;i<path_arr.length;i++){
-            if(!(path_arr[i].equals("F")) && !(path_arr[i].equals("L")) &&!(path_arr[i].equals("R"))){
-                repetition= Integer.parseInt(path_arr[i]);
-                continue;
-            }
-
-            else{
-                for(int j=0;j<repetition;j++){
-                    canonicalPath.add(path_arr[i]);
-                }
-                repetition=1;
-            }
-        }
-        return canonicalPath;
-    }
-
-    //outputs string message verifying if user input path is correct
-    public String checkPath(String userPath){
-        if (userPath.equals("")){
-            return "no input path";
-        }
-
-        ArrayList<String> path= convertUserPath(userPath);
-        boolean flag= false;
-
-        for (String item : path) {
-            System.out.print(item);
-        }
-
-        
-
-        if(flag){
-            flag= true;
-        }
-
-        if(flag){
-            return "correct path";
-        }
-
-        return "incorrect path";
-        
-    }
+    
 
 
     //to verify maze ArrayList correctly contained maze

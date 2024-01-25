@@ -40,8 +40,9 @@ public class Main {
 
             while ((line = reader.readLine()) != null) {
                 ArrayList<String> row = new ArrayList<String>();
+
                 for (int idx = 0; idx < line.length(); idx++) {
-                    
+                
                     if (line.charAt(idx) == '#') {
                         System.out.print("WALL ");
                         row.add("WALL ");
@@ -59,10 +60,13 @@ public class Main {
         }
 
         Maze mazeTest= new Maze(userMaze);
-
+        FindPath path= new FindPath(mazeTest);
+        
+        
         logger.info("**** Computing path");
-        logger.info("Path: " + mazeTest.findCanonicalPath());
-        logger.info("Verify User Path: " + mazeTest.checkPath(userPath));
+        logger.info("Path: " + path.findFactorizedPath());
+        logger.info(mazeTest.findEntryTile());
+        //logger.info("Verify User Path: " + mazeTest.checkPath(userPath));
         logger.info("** End of MazeRunner");
         
         
