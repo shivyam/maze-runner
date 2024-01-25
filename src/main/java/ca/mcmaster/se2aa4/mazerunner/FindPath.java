@@ -17,13 +17,22 @@ public class FindPath{
     //finds path in the form "FFFRRFFLLF"
     public String findCanonicalPath(){
         
-        String path="";
-        int start= dummyMaze.findEntryTile();
+        ArrayList<String> path= new ArrayList<String>();
+        int currColumn=0;
+        int currRow= dummyMaze.findEntryTile();
+        
         int end = dummyMaze.findExitTile();
         int width= dummyMaze.getWidth();
-        //while()
+        int height = dummyMaze.getHeight();
+        System.out.println(dummyMaze.getTile(currRow,currColumn));
+        while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=height-1 && dummyMaze.getTile(currRow,currColumn)!="WALL "){
+                System.out.println("hello");
+                currColumn+=1;
+                path.add("F");
+        }
+        String strPath = String.join("",path);
 
-        return "FFFFFFFFFFFFFFFFFFFLLLLLL";
+        return strPath;
     }    
     
 

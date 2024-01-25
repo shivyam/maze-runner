@@ -16,6 +16,7 @@ public class Maze{
         return maze;
     }
 
+    //to aid with finding maze path
     public int getWidth(){
         if (maze.size()>0){
             return maze.get(0).size();
@@ -23,6 +24,18 @@ public class Maze{
         return -1;
     }
 
+    public int getHeight(){
+        if (maze.size()>0){
+            return maze.size();
+        }
+        return -1;
+    }
+
+    public String getTile(int rowIndex, int columnIndex){
+        ArrayList<String> row= new ArrayList<>(maze.get(rowIndex));
+        return row.get(columnIndex);
+    }
+    
     public int findExitTile(){
         for (int i=0;i<maze.size();i++){
             ArrayList<String> row = new ArrayList<String>(maze.get(i));
