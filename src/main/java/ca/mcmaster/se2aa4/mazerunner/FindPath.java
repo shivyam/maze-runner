@@ -7,7 +7,7 @@ public class FindPath{
     public Maze dummyMaze;
     Direction dir;
     int currColumn=0;
-    int currRow= dummyMaze.findEntryTile();
+    int currRow;
 
 
     public FindPath(Maze maze){
@@ -125,7 +125,7 @@ public class FindPath{
         //finds path in the form "FFFRRFFLLF"
     public String findCanonicalPath(){
         
-        
+        currRow= dummyMaze.findEntryTile();
         ArrayList<String> path= new ArrayList<String>();
         
         
@@ -133,13 +133,13 @@ public class FindPath{
         int width= dummyMaze.getWidth();
         int height = dummyMaze.getHeight();
     
-        while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=(height-1) && dummyMaze.getTile(currRow,currColumn)!="WALL "){
+        // while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=(height-1) && dummyMaze.getTile(currRow,currColumn)!="WALL "){
             
 
-            }
+        //     }
             
 
-        }
+        // }
         
         String strPath = String.join("",path);
 

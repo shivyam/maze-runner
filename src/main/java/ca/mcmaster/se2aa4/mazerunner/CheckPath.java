@@ -6,10 +6,12 @@ public class CheckPath{
 
     public Maze dummyMaze;
     public String userPath;
+    Direction dir;
 
     public CheckPath(Maze maze, String userPath){
         this.dummyMaze= maze;
         this.userPath= userPath;
+        this.dir= new Direction(dummyMaze);
     }
 
     //Converts and returns user input path in canonical form, and strips all whitespace fro inputted apth
@@ -59,20 +61,38 @@ public class CheckPath{
 
         int index=0;
         while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=(height-1) && index<path.size()){
-                if(dummyMaze.getTile(currRow,currColumn)=="WALL "){
+                if(dummyMaze.getTile(currRow,currColumn).equals("WALL ")){
                     return "incorrect path";
                 }
                 if(path.get(index).equals("F")){
-                    //System.out.println("im here");
-                    currColumn+=1;
-                    //System.out.println("Num: " +currColumn);
+                
+                    if(dir.getDirection().equals("east")){
+                        currColumn+=1;
+                    }
+                    else if(dir.getDirection().equals("south")){
+                        currRow+=1;
+                    }
+                    else if(dir.getDirection().equals("west")){
+                        currColumn-=1;
+                    }
+                    else{
+                        currRow-=1;
+                    }
+    
                 }
-                index+=1;
+                else if((path.get(index).equals("L"))){
+                    dir.turnLeft();
+                }
+                else{
+                    dir.turnRight();
+                }
+
+            index+=1;
                 
         }
         
-        //System.out.println("Current Row: " + currRow + "End Row: " + (endRow) + "Current Column: " + currColumn + "    "  + "End Column: " + (width) );
-        if(currRow==(endRow) && currColumn==(width)){
+        System.out.println("Current Row: " + currRow + "End Row: " + (endRow) + "Current Column: " + currColumn + "    "  + "End Column: " + (width) );
+        if(currRow==(endRow) && currColumn==(width) && index==path.size()){
                 return "correct path";
         }
         else{
