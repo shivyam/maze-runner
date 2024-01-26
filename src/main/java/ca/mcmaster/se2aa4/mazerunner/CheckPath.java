@@ -40,6 +40,7 @@ public class CheckPath{
     }
 
     //outputs string message verifying if user input path is correct or not
+    /*
     public String checkPath(){
 
         //if no path is inputted
@@ -100,4 +101,5 @@ public class CheckPath{
         }
         
     }
+    */
 }

@@ -68,6 +68,20 @@ public class Maze{
         return 0;
     }
 
+    public void printMaze(){
+        for (int i=0; i<maze.size(); i++) {
+            ArrayList<String> row = new ArrayList<String>(maze.get(i));
+            for (int j=0; j<row.size(); j++) {
+                System.out.print(row.get(j));
+            }
+            System.out.println("");
+        }
+       
+    }
+
     
 
 }
+
+
+

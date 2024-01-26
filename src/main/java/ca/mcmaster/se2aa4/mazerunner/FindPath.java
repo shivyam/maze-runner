@@ -8,11 +8,15 @@ public class FindPath{
     Direction dir;
     int currColumn=0;
     int currRow;
-
+    ArrayList<String> path= new ArrayList<String>();
+    int width;
+    int height;
 
     public FindPath(Maze maze){
         this.dummyMaze= maze;
         this.dir= new Direction(dummyMaze);
+        this.width= dummyMaze.getWidth();
+        this.height= dummyMaze.getHeight();
     }
 
 
@@ -122,30 +126,157 @@ public class FindPath{
 
 
 
+
         //finds path in the form "FFFRRFFLLF"
     public String findCanonicalPath(){
         
         currRow= dummyMaze.findEntryTile();
-        ArrayList<String> path= new ArrayList<String>();
-        
         
         int end = dummyMaze.findExitTile();
-        int width= dummyMaze.getWidth();
-        int height = dummyMaze.getHeight();
-    
-        // while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=(height-1) && dummyMaze.getTile(currRow,currColumn)!="WALL "){
-            
-
-        //     }
-            
-
-        // }
+        String strPath;
+        int count=0;
         
-        String strPath = String.join("",path);
-
-        return strPath;
-    }    
+        System.out.println("Curr Column:  " + currColumn);
+        while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=(height-1) && dummyMaze.getTile(currRow,currColumn)!="WALL " && count<20){
+            System.out.println("entered while loop");
+            if(canMoveForward()){
+                System.out.println("hello");
+                moveForward();
+            }
+            else{
+                
+                turnRight();
+                if(canMoveForward()){
+                    
+                    path.add("R");
+                    moveForward();
+                }
+                else{
+                    turnLeft();
+                    if(canMoveForward()){
+                      
+                        path.add("L");
+                        moveForward();
+                    }
+                }
+            }
+         
     
+            System.out.println("Row:  " + currRow +  "     End Row:   " + end +  "   Column:    " + currColumn + "      End Column: " +   (width-1));
+            if(currRow==end && currColumn==(width-1)){
+                strPath = String.join("",path);
+                return strPath;
+            }
+
+            System.out.println("currColumn<=(width-1):  "+ (currColumn<=(width-1)));
+            System.out.println("currColumn>=0:  " + (currColumn>=0));
+            System.out.println("currRow>=0:  "+ (currRow>=0));
+            System.out.println("currRow<=(height-1):  " + (currRow<=(height-1)));
+            System.out.println("dummyMaze.getTile(currRow,currColumn)!=WALL:  " + (dummyMaze.getTile(currRow,currColumn)!="WALL "));
+
+            count+=1;
+        }
+            strPath = String.join("",path);
+            dummyMaze.printMaze();
+            return strPath;
+
+    }
+        
+        
+
+   
+      
+    
+    /*
+    public boolean surrounded(){
+        int num=0;
+        if(dummyMaze.getTile(currRow+1,currColumn)=="WALL "){
+            count+=1;
+        }
+        else if(dummyMaze.getTile(currRow-1,currColumn)=="WALL "){
+            count+=1;
+        }
+        else if(dummyMaze.getTile(currRow,currColumn+1)=="WALL "){
+            count+=1;
+        }
+        else if(dummyMaze.getTile(currRow,currColumn-1)=="WALL "){
+            count+=1;
+        }
+
+        if count(==)
+    }
+*/
+    public void turnRight(){
+        String direction= dir.getDirection();
+        if(direction.equals("east")){
+            dir.setDirection("south");
+        }
+        else if(direction.equals("south")){
+            dir.setDirection("west");
+        }
+        else if(direction.equals("west")){
+            dir.setDirection("north");
+        }
+        else{
+            dir.setDirection("east");
+        }
+        System.out.println();
+        System.out.println("Direction Update: " + dir.getDirection());
+        System.out.println();
+        
+        
+    }
+
+
+    public void turnLeft(){
+        String direction= dir.getDirection();
+        if(direction.equals("east")){
+            dir.setDirection("north");
+        }
+        else if(direction.equals("south")){
+            dir.setDirection("east");
+        }
+        else if(direction.equals("west")){
+            dir.setDirection("south");
+        }
+        else{
+            dir.setDirection("west");
+        }
+
+        System.out.println();
+        System.out.println("Direction Update: " + dir.getDirection());
+        System.out.println();
+        
+    }
+
+    public boolean canMoveForward(){
+        String direction= dir.getDirection();
+
+        if(direction.equals("north")){
+            if(currRow-1>=0 && dummyMaze.getTile(currRow-1,currColumn)!="WALL "){
+                return true;
+            }
+        }
+        else if(direction.equals("east")){
+            if(currColumn+1<=(width-1) && dummyMaze.getTile(currRow,currColumn+1)!="WALL "){
+                return true;
+            }
+        }
+        else if(direction.equals("south")){
+            System.out.println("IMH EHRHEHEHRHEEHRHEHE");
+            if(currRow+1<=(height-1) && dummyMaze.getTile(currRow+1,currColumn)!="WALL "){
+                
+                return true;
+            }
+            
+        }
+        else if(direction.equals("west")){
+            if(currColumn-1>=0 && dummyMaze.getTile(currRow,currColumn-1)!="WALL "){
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void moveForward(){
         String direction= dir.getDirection();
@@ -157,10 +288,13 @@ public class FindPath{
         }
         else if(direction.equals("south")){
             currRow=dir.moveSouth(currRow);
+            
         }
         else{
             currColumn= dir.moveWest(currColumn);
         }
+        path.add("F");
+
     }
 
     
