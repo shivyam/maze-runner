@@ -5,37 +5,187 @@ import java.util.Arrays;
 public class FindPath{
 
     public Maze dummyMaze;
+    Direction dir;
+    int currColumn=0;
+    int currRow= dummyMaze.findEntryTile();
 
 
     public FindPath(Maze maze){
         this.dummyMaze= maze;
+        this.dir= new Direction(dummyMaze);
     }
 
 
 
-   //returns the row from the first column that the entry tile is located on
-    //finds path in the form "FFFRRFFLLF"
+   
+    // //finds path in the form "FFFRRFFLLF"
+    // public String findCanonicalPath(){
+        
+        
+    //     ArrayList<String> path= new ArrayList<String>();
+        
+        
+    //     int end = dummyMaze.findExitTile();
+    //     int width= dummyMaze.getWidth();
+    //     int height = dummyMaze.getHeight();
+    
+    //     while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=(height-1) && dummyMaze.getTile(currRow,currColumn)!="WALL "){
+    //         if(dir.getDirection().equals("east")){
+    //             if(dummyMaze.getTile(currRow+1, currColumn)=="WALL " && dummyMaze.getTile(currRow, currColumn+1)!="WALL "){
+    //             currColumn+=1;
+    //             path.add("F");
+    //         }
+    //             else if (dummyMaze.getTile(currRow, currColumn+1)=="WALL " && dummyMaze.getTile(currRow+1, currColumn)=="WALL "){
+    //                 dir.turnLeft();
+    //                 path.add("L");
+    //                 moveForward();
+    //                 path.add("F");
+    //             }
+    //             else{
+    //                 dir.turnRight();
+    //                 path.add("R");
+    //                 moveForward();
+    //                 path.add("F");
+    //             }
+
+    //         }
+            
+
+    //         else if(dir.getDirection().equals("north")){
+    //             if(dummyMaze.getTile(currRow, currColumn+1)=="WALL " && dummyMaze.getTile(currRow-1, currColumn)!="WALL "){
+    //             currRow-=1;
+    //             path.add("F");
+    //         }
+    //             else if (dummyMaze.getTile(currRow-1, currColumn)=="WALL " && dummyMaze.getTile(currRow, currColumn+1)=="WALL "){
+    //                 dir.turnLeft();
+    //                 path.add("L");
+    //                 moveForward();
+    //                 path.add("F");
+    //             }
+    //             else{
+    //                 dir.turnRight();
+    //                 path.add("R");
+    //                 moveForward();
+    //                 path.add("F");
+    //             }
+
+    //         }
+
+    //         else if(dir.getDirection().equals("south")){
+    //             if(dummyMaze.getTile(currRow, currColumn-1)=="WALL " && dummyMaze.getTile(currRow+1, currColumn)!="WALL "){
+    //             currRow+=1;
+    //             path.add("F");
+    //         }
+    //             else if (dummyMaze.getTile(currRow+1, currColumn)=="WALL " && dummyMaze.getTile(currRow-1, currColumn)=="WALL "){
+    //                 dir.turnLeft();
+    //                 path.add("L");
+    //                 moveForward();
+    //                 path.add("F");
+    //             }
+    //             else{
+    //                 dir.turnRight();
+    //                 path.add("R");
+    //                 moveForward();
+    //                 path.add("F");
+    //             }
+
+    //         }
+
+    //         else{
+    //             if(dummyMaze.getTile(currRow-1, currColumn)=="WALL " && dummyMaze.getTile(currRow, currColumn-1)!="WALL "){
+    //             currColumn-=1;
+    //             path.add("F");
+    //         }
+    //             else if (dummyMaze.getTile(currRow-1, currColumn)=="WALL " && dummyMaze.getTile(currRow, currColumn-1)=="WALL "){
+    //                 dir.turnLeft();
+    //                 path.add("L");
+    //                 moveForward();
+    //                 path.add("F");
+    //             }
+    //             else{
+    //                 dir.turnRight();
+    //                 path.add("R");
+    //                 moveForward();
+    //                 path.add("F");
+    //             }
+
+    //         }   
+            
+            
+    //     }
+        
+    //     String strPath = String.join("",path);
+
+    //     return strPath;
+    // }    
+    
+
+
+
+        //finds path in the form "FFFRRFFLLF"
     public String findCanonicalPath(){
         
+        
         ArrayList<String> path= new ArrayList<String>();
-        int currColumn=0;
-        int currRow= dummyMaze.findEntryTile();
+        
         
         int end = dummyMaze.findExitTile();
         int width= dummyMaze.getWidth();
         int height = dummyMaze.getHeight();
-        System.out.println(dummyMaze.getTile(currRow,currColumn));
+    
         while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=(height-1) && dummyMaze.getTile(currRow,currColumn)!="WALL "){
-                currColumn+=1;
-                path.add("F");
+            
+
+            }
+            
+
         }
+        
         String strPath = String.join("",path);
 
         return strPath;
     }    
     
 
+    public void moveForward(){
+        String direction= dir.getDirection();
+        if(direction.equals("north")){
+            currRow=dir.moveNorth(currRow);
+        }
+        else if(direction.equals("east")){
+            currColumn=dir.moveEast(currColumn);
+        }
+        else if(direction.equals("south")){
+            currRow=dir.moveSouth(currRow);
+        }
+        else{
+            currColumn= dir.moveWest(currColumn);
+        }
+    }
+
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //uses findCanonicalPath method to find maze path, then outputs path in the form "3F2R2F2LF"
     public String findFactorizedPath(){
         String path = findCanonicalPath();
