@@ -12,9 +12,11 @@ public class Maze{
         maze= new ArrayList<ArrayList<String>>(userMaze);
     }
 
+
     public ArrayList<ArrayList<String>> getMaze(){
         return maze;
     }
+
 
     //to aid with finding maze path + check user path
     public int getWidth(){
@@ -23,6 +25,7 @@ public class Maze{
         }
         return -1;
     }
+
 
     //to aid with finding maze path + check user path
     public int getHeight(){

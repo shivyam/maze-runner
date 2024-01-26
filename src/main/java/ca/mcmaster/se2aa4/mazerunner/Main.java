@@ -27,6 +27,8 @@ public class Main {
         try {
             CommandLine cmd = parser.parse(options, args);
             String inputFilePath = cmd.getOptionValue("i");
+            
+            //checks if user uses -p flag
             if(cmd.hasOption("p")) {
                     userPath = cmd.getOptionValue("p");
             }
