@@ -25,8 +25,7 @@ public class FindPath{
         int width= dummyMaze.getWidth();
         int height = dummyMaze.getHeight();
         System.out.println(dummyMaze.getTile(currRow,currColumn));
-        while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=height-1 && dummyMaze.getTile(currRow,currColumn)!="WALL "){
-                System.out.println("hello");
+        while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=(height-1) && dummyMaze.getTile(currRow,currColumn)!="WALL "){
                 currColumn+=1;
                 path.add("F");
         }

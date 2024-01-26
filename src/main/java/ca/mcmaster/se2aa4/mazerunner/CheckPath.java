@@ -4,8 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 public class CheckPath{
 
-    //Converts and returns user input path in canonical form, and strips all whitespace fro inputted apth
+    public Maze dummyMaze;
+    public String userPath;
 
+    public CheckPath(Maze maze, String userPath){
+        this.dummyMaze= maze;
+        this.userPath= userPath;
+    }
+
+    //Converts and returns user input path in canonical form, and strips all whitespace fro inputted apth
     public ArrayList<String> convertUserPath(String userPath){
 
         //strips whitespace from user input path
@@ -31,7 +38,7 @@ public class CheckPath{
     }
 
     //outputs string message verifying if user input path is correct or not
-    public String checkPath(String userPath){
+    public String checkPath(){
 
         //if no path is inputted
         if (userPath.equals("")){
@@ -39,24 +46,38 @@ public class CheckPath{
         }
 
         ArrayList<String> path= convertUserPath(userPath);
-        //flag is true 
-        boolean flag= false;
+       
 
-        for (String item : path) {
-            System.out.print(item);
-        }
-
+        int currColumn=0;
+        int currRow= dummyMaze.findEntryTile();
         
+        int endRow = dummyMaze.findExitTile();
+        int width= dummyMaze.getWidth();
 
-        if(flag){
-            flag= true;
+        int height = dummyMaze.getHeight();
+        System.out.println(dummyMaze.getTile(currRow,currColumn));
+
+        int index=0;
+        while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=(height-1) && index<path.size()){
+                if(dummyMaze.getTile(currRow,currColumn)=="WALL "){
+                    return "incorrect path";
+                }
+                if(path.get(index).equals("F")){
+                    //System.out.println("im here");
+                    currColumn+=1;
+                    //System.out.println("Num: " +currColumn);
+                }
+                index+=1;
+                
         }
-
-        if(flag){
-            return "correct path";
+        
+        //System.out.println("Current Row: " + currRow + "End Row: " + (endRow) + "Current Column: " + currColumn + "    "  + "End Column: " + (width) );
+        if(currRow==(endRow) && currColumn==(width)){
+                return "correct path";
         }
-
-        return "incorrect path";
+        else{
+            return "incorrect path";
+        }
         
     }
 }
