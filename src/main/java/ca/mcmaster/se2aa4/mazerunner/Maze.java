@@ -16,7 +16,7 @@ public class Maze{
         return maze;
     }
 
-    //to aid with finding maze path
+    //to aid with finding maze path + check user path
     public int getWidth(){
         if (maze.size()>0){
             return maze.get(0).size();
@@ -24,6 +24,7 @@ public class Maze{
         return -1;
     }
 
+    //to aid with finding maze path + check user path
     public int getHeight(){
         if (maze.size()>0){
             return maze.size();
@@ -31,11 +32,15 @@ public class Maze{
         return -1;
     }
 
+
+    //returns if current tile is a wall or open
     public String getTile(int rowIndex, int columnIndex){
         ArrayList<String> row= new ArrayList<>(maze.get(rowIndex));
         return row.get(columnIndex);
     }
+
     
+    //searches last column in maze to find ending position
     public int findExitTile(){
         for (int i=0;i<maze.size();i++){
             ArrayList<String> row = new ArrayList<String>(maze.get(i));
@@ -47,6 +52,8 @@ public class Maze{
         return 0;
     }
 
+
+    //searches first column in maze to find starting position
     public int findEntryTile(){
         for (int i=0;i<maze.size();i++){
             ArrayList<String> row = new ArrayList<String>(maze.get(i));
@@ -59,18 +66,5 @@ public class Maze{
     }
 
     
-
-
-    //to verify maze ArrayList correctly contained maze
-    // public void printMaze(){
-    //     for (int i=0; i<maze.size(); i++) {
-    //         ArrayList<String> row = new ArrayList<String>(maze.get(i));
-    //         for (int j=0; j<row.size(); j++) {
-    //             System.out.print(row.get(j)); 
-    //         }
-    //         System.out.println("");
-    //     }
-        
-    // }
 
 }

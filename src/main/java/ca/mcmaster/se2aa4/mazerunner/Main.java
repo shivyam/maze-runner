@@ -56,17 +56,18 @@ public class Main {
                 userMaze.add(row);
             }
         } catch(Exception e) {
-            logger.info("/!\\ An error has occured /!\\");
+            logger.error("/!\\ An error has occured /!\\");
         }
 
         Maze mazeTest= new Maze(userMaze);
         FindPath path= new FindPath(mazeTest);
+        CheckPath check= new CheckPath(mazeTest, userPath);
         
         
         logger.info("**** Computing path");
         logger.info("Path: " + path.findFactorizedPath());
         logger.info(mazeTest.findEntryTile());
-        //logger.info("Verify User Path: " + mazeTest.checkPath(userPath));
+        logger.info("Verify User Path: " + check.checkPath());
         logger.info("** End of MazeRunner");
         
         
