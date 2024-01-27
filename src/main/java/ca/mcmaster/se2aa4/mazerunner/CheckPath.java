@@ -40,7 +40,7 @@ public class CheckPath{
     }
 
     //outputs string message verifying if user input path is correct or not
-    /*
+    
     public String checkPath(){
 
         //if no path is inputted
@@ -79,27 +79,61 @@ public class CheckPath{
                     else{
                         currRow-=1;
                     }
-    
                 }
                 else if((path.get(index).equals("L"))){
-                    dir.turnLeft();
+                    turnLeft();
                 }
                 else{
-                    dir.turnRight();
+                    turnRight();
                 }
-
             index+=1;
-                
         }
         
-        System.out.println("Current Row: " + currRow + "End Row: " + (endRow) + "Current Column: " + currColumn + "    "  + "End Column: " + (width) );
-        if(currRow==(endRow) && currColumn==(width) && index==path.size()){
+        System.out.println("Current Row: " + currRow + "End Row: " + (endRow) + "Current Column: " + currColumn + "    "  + "End Column: " + (width-1) );
+        if(currRow==(endRow) && currColumn==(width-1) && index==path.size()){
                 return "correct path";
         }
         else{
             return "incorrect path";
         }
-        
     }
-    */
+
+
+    public void turnRight(){
+        String direction= dir.getDirection();
+        if(direction.equals("east")){
+            dir.setDirection("south");
+        }
+        else if(direction.equals("south")){
+            dir.setDirection("west");
+        }
+        else if(direction.equals("west")){
+            dir.setDirection("north");
+        }
+        else{
+            dir.setDirection("east");
+        }
+    }
+
+
+    public void turnLeft(){
+        String direction= dir.getDirection();
+        if(direction.equals("east")){
+            dir.setDirection("north");
+        }
+        else if(direction.equals("south")){
+            dir.setDirection("east");
+        }
+        else if(direction.equals("west")){
+            dir.setDirection("south");
+        }
+        else{
+            dir.setDirection("west");
+        }
+    }
+
+
+        
+    
+    
 }

@@ -35,9 +35,6 @@ public class FindPath{
             }
 
         while(currRow!=end || currColumn!=(width-1)){
-            System.out.println();
-            System.out.println("Current position: [" + currRow  + ", " + currColumn+ "]" );
-            System.out.println();
             if(canTurnRight()){
                 turnRight();
                 path.add("R");
@@ -45,7 +42,6 @@ public class FindPath{
             }
 
             else if(canMoveForward()){
-                System.out.println("hello");
                 moveForward();
             }
             else if(canTurnLeft()){
@@ -63,7 +59,7 @@ public class FindPath{
             count+=1;
         }
     
-            System.out.println("Row:  " + currRow +  "     End Row:   " + end +  "   Column:    " + currColumn + "      End Column: " +   (width-1));
+            //System.out.println("Row:  " + currRow +  "     End Row:   " + end +  "   Column:    " + currColumn + "      End Column: " +   (width-1));
             if(currRow==end && currColumn==(width-1)){
                 strPath = String.join("",path);
                 return strPath;
@@ -74,8 +70,51 @@ public class FindPath{
             return strPath;
     }
     
+
+
+    //uses findCanonicalPath method to find maze path, then outputs path in the form "3F2R2F2LF"
+    public String findFactorizedPath(){
+        String path = findCanonicalPath();
+        String[] path_arr= path.split("");
+
+        if(path_arr.length==0){
+            return "";
+        }
+
+        ArrayList<String> factorizedPath= new ArrayList<String>();
+        int repetition=1;
+        String track= path_arr[0];
+        
+        for(int i=1;i<path_arr.length;i++){
+            if (path_arr[i].equals(track)){
+                repetition+=1;
+            }
+            else{
+                if(repetition>1){
+                    factorizedPath.add(String.valueOf(repetition) + track);
+                }
+                else{
+                    factorizedPath.add(track);
+                }
+                track= path_arr[i];
+                repetition=1;
+            }   
+        }
+
+        if(repetition>1){
+            factorizedPath.add(repetition + path_arr[path_arr.length - 1]);
+        }
+        else{
+            factorizedPath.add(path_arr[path_arr.length - 1]);
+        }
+        
+        String strFactorizedPath = String.join("", factorizedPath);
+        return strFactorizedPath;
+    }
+
         
         
+
     public boolean canTurnRight(){
         String direction= dir.getDirection();
         if(direction.equals("east")){
@@ -100,6 +139,9 @@ public class FindPath{
         }
         return false;
     }
+
+
+
    
 
     public boolean canTurnLeft(){
@@ -129,7 +171,6 @@ public class FindPath{
 
 
 
-
     public void turnRight(){
         String direction= dir.getDirection();
         if(direction.equals("east")){
@@ -144,10 +185,6 @@ public class FindPath{
         else{
             dir.setDirection("east");
         }
-        System.out.println();
-        System.out.println("Direction Update: " + dir.getDirection());
-        System.out.println();
-        
         
     }
 
@@ -165,14 +202,7 @@ public class FindPath{
         }
         else{
             dir.setDirection("west");
-        }
-
-        System.out.println();
-        System.out.println("Direction Update: " + dir.getDirection());
-        System.out.println();
-        
-        
-        
+        }  
     }
 
     public boolean canMoveForward(){
@@ -183,19 +213,20 @@ public class FindPath{
                 return true;
             }
         }
+
         else if(direction.equals("east")){
             if(currColumn+1<=(width-1) && dummyMaze.getTile(currRow,currColumn+1)!="WALL "){
                 return true;
             }
         }
+
         else if(direction.equals("south")){
-            System.out.println("IMH EHRHEHEHRHEEHRHEHE");
             if(currRow+1<=(height-1) && dummyMaze.getTile(currRow+1,currColumn)!="WALL "){
                 
                 return true;
-            }
-            
+            }    
         }
+
         else if(direction.equals("west")){
             if(currColumn-1>=0 && dummyMaze.getTile(currRow,currColumn-1)!="WALL "){
                 return true;
@@ -223,58 +254,9 @@ public class FindPath{
 
     }
 
+
+
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //uses findCanonicalPath method to find maze path, then outputs path in the form "3F2R2F2LF"
-    public String findFactorizedPath(){
-        String path = findCanonicalPath();
-        String[] path_arr= path.split("");
-
-        if(path_arr.length==0){
-            return "";
-        }
-
-        ArrayList<String> factorizedPath= new ArrayList<String>();
-        int repetition=1;
-        String track= path_arr[0];
-        
-        for(int i=1;i<path_arr.length;i++){
-            if (path_arr[i].equals(track)){
-                repetition+=1;
-            }
-            else{
-                System.out.println("hello");
-                factorizedPath.add(String.valueOf(repetition) + track);
-                track= path_arr[i];
-                repetition=1;
-            }   
-        }
-
-        factorizedPath.add(repetition + path_arr[path_arr.length - 1]);
-        String strFactorizedPath = String.join("", factorizedPath);
-        return strFactorizedPath;
-    }
 
 
 }

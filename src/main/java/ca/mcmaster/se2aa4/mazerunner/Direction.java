@@ -64,43 +64,6 @@ public class Direction{
     
 
 
-    public String checkAround(int row, int column){
-        return "";
-    }
 
 
-
-
-
-    //public void turnRight(){
-    //     if(direction.equals("east")){
-    //         direction="south";
-    //     }
-    //     else if(direction.equals("south")){
-    //         direction="west";
-    //     }
-    //     else if(direction.equals("west")){
-    //         direction="north";
-    //     }
-    //     else{
-    //         direction="east";
-    //     }
-    // }
-
-
-    // public void turnLeft(){
-    //     if(direction.equals("east")){
-    //         direction="north";
-    //     }
-    //     else if(direction.equals("south")){
-    //         direction="east";
-    //     }
-    //     else if(direction.equals("west")){
-    //         direction="south";
-    //     }
-    //     else{
-    //         direction="west";
-    //     }
-    // }
-
-}
+   }

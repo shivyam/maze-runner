@@ -67,7 +67,7 @@ public class Main {
         
         
         logger.info("**** Computing path");
-        logger.info("Path: " + path.findCanonicalPath());
+        logger.info("Path: " + path.findFactorizedPath());
         logger.info(mazeTest.findEntryTile());
         //logger.info("Verify User Path: " + check.checkPath());
         logger.info("** End of MazeRunner");
