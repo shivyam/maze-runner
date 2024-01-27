@@ -11,21 +11,22 @@ public class FindPath{
     ArrayList<String> path= new ArrayList<String>();
     int width;
     int height;
-    int end;
+    int endRow;
 
     public FindPath(Maze maze){
         this.dummyMaze= maze;
         this.dir= new Direction(dummyMaze);
         this.width= dummyMaze.getWidth();
         this.height= dummyMaze.getHeight();
-        this.end= dummyMaze.findExitTile();
+        this.endRow= dummyMaze.findExitTile();
+        this.currRow= dummyMaze.findEntryTile();
     }
 
 
     //finds path in the form "FFFRRFFLLF"
     public String findCanonicalPath(){
         
-        currRow= dummyMaze.findEntryTile();
+        
 
         String strPath;
         int count=0;
@@ -34,7 +35,7 @@ public class FindPath{
                 moveForward();
             }
 
-        while(currRow!=end || currColumn!=(width-1)){
+        while(currRow!=endRow|| currColumn!=(width-1)){
             if(canTurnRight()){
                 turnRight();
                 path.add("R");
@@ -59,8 +60,8 @@ public class FindPath{
             count+=1;
         }
     
-            //System.out.println("Row:  " + currRow +  "     End Row:   " + end +  "   Column:    " + currColumn + "      End Column: " +   (width-1));
-            if(currRow==end && currColumn==(width-1)){
+            //System.out.println("Row:  " + currRow +  "     endRow Row:   " + endRow +  "   Column:    " + currColumn + "      endRow Column: " +   (width-1));
+            if(currRow==endRow && currColumn==(width-1)){
                 strPath = String.join("",path);
                 return strPath;
             }
