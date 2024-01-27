@@ -15,26 +15,17 @@ public class Main {
     
 
     public static void main(String[] args) {
-        logger.info("** Starting Maze Runner");
-        Options options = new Options();
-        options.addOption("i", true, "input maze filepath");
-        options.addOption("p", true, "user path guess");
-
         ArrayList<ArrayList<String>> userMaze = new ArrayList<ArrayList<String>>();
-        String userPath= "";
+        Configuration config= Configuration.load(args);
+        System.out.println(config);
+        String inputFilePath= config.inputFilePath();
+        String userPath= config.userPath();
 
-        CommandLineParser parser = new DefaultParser();
-        try {
-            CommandLine cmd = parser.parse(options, args);
-            String inputFilePath = cmd.getOptionValue("i");
-            
-            //checks if user uses -p flag
-            if(cmd.hasOption("p")) {
-                    userPath = cmd.getOptionValue("p");
-            }
-            
-            logger.info(userPath);
+        logger.info(userPath);
+        try{
 
+            
+        
             logger.info("**** Reading the maze from file " + inputFilePath);
             BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
             String line;
@@ -69,7 +60,7 @@ public class Main {
         logger.info("**** Computing path");
         logger.info("Path: " + path.findFactorizedPath());
         logger.info(mazeTest.findEntryTile());
-        //logger.info("Verify User Path: " + check.checkPath());
+        logger.info("Verify User Path: " + check.checkPath());
         logger.info("** End of MazeRunner");
         
         
