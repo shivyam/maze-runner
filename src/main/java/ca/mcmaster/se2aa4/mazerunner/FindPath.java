@@ -114,7 +114,6 @@ public class FindPath{
     }
 
         
-        
 
     public boolean canTurnRight(){
         String direction= dir.getDirection();
