@@ -7,7 +7,7 @@ import java.io.FileReader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.commons.cli.*;
-
+import java.io.IOException;
 
 public class Main {
 
@@ -20,17 +20,11 @@ public class Main {
         System.out.println(config);
         String inputFilePath= config.inputFilePath();
         String userPath= config.userPath();
-
-        logger.info(userPath);
         try{
-
-            
-        
             logger.info("**** Reading the maze from file " + inputFilePath);
             BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
             String line;
             
-
             while ((line = reader.readLine()) != null) {
                 ArrayList<String> row = new ArrayList<String>();
 
@@ -48,20 +42,25 @@ public class Main {
                 System.out.print(System.lineSeparator());
                 userMaze.add(row);
             }
-        } catch(Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
+            
+                Maze mazeTest= new Maze(userMaze);
+                FindPath path= new FindPath(mazeTest);
+                CheckPath check= new CheckPath(mazeTest, userPath);
+                logger.info("**** Computing path");
+                logger.info("Path: " + path.findFactorizedPath());
+                logger.info(mazeTest.findEntryTile());
+                logger.info("Verify User Path: " + check.checkPath());
+                logger.info("** End of MazeRunner");
+        } 
+        catch (IOException e) { 
+            logger.error("Error occured while reading the file: " + e.getMessage());
         }
+       
+       
 
-        Maze mazeTest= new Maze(userMaze);
-        FindPath path= new FindPath(mazeTest);
-        CheckPath check= new CheckPath(mazeTest, userPath);
+       
         
         
-        logger.info("**** Computing path");
-        logger.info("Path: " + path.findFactorizedPath());
-        logger.info(mazeTest.findEntryTile());
-        logger.info("Verify User Path: " + check.checkPath());
-        logger.info("** End of MazeRunner");
         
         
     }

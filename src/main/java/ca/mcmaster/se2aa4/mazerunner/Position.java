@@ -57,10 +57,6 @@ public class Position{
         return false;
     }
 
-
-
-   
-
     public boolean canTurnLeft(){
         String direction= dir.getDirection();
         if(direction.equals("east")){
@@ -85,8 +81,6 @@ public class Position{
         }
         return false;
     }
-
-
 
     public void turnRight(){
         String direction= dir.getDirection();
