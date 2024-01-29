@@ -52,8 +52,7 @@ public class FindPath implements MazeExploration{
         return path;
     }
     
-
-
+    
     //uses findCanonicalPath method to find maze path, then outputs path in the form "3F2R2F2LF"
     public String findFactorizedPath(){
         String path = findCanonicalPath();
