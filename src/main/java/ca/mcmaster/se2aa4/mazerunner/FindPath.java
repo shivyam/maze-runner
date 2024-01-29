@@ -52,7 +52,7 @@ public class FindPath implements MazeExploration{
         return path;
     }
     
-    
+
     //uses findCanonicalPath method to find maze path, then outputs path in the form "3F2R2F2LF"
     public String findFactorizedPath(){
         String path = findCanonicalPath();
@@ -67,6 +67,7 @@ public class FindPath implements MazeExploration{
         
         for(int i=1;i<path_arr.length;i++){
             if (path_arr[i].equals(track)){
+                //increases count each time current move is repeated
                 repetition+=1;
             }
             else{
@@ -76,6 +77,7 @@ public class FindPath implements MazeExploration{
                 else{
                     strFactorizedPath+= track;
                 }
+                //resets move count
                 track= path_arr[i];
                 repetition=1;
             }   
