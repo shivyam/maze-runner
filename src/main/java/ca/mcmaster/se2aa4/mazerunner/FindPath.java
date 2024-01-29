@@ -2,31 +2,27 @@ package ca.mcmaster.se2aa4.mazerunner;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class FindPath{
+public class FindPath implements MazeExploration{
 
     private Maze dummyMaze;
-    private Direction dir;
-    private int endRow;
-    private String path;
-    private Position pos;
-    private String strFactorizedPath;
+
 
     public FindPath(Maze maze){
         this.dummyMaze= maze;
-        this.dir= new Direction(dummyMaze);
-        this.pos= new Position(dummyMaze);
-        this.endRow= dummyMaze.findExitTile();
-        this.path="";
-        this.strFactorizedPath="";
     }
 
 
     //finds path in the form "FFFRRFFLLF"
     public String findCanonicalPath(){
+        int endRow= dummyMaze.findExitTile();
+        String path="";
+        Direction dir= new Direction(dummyMaze);
+        Position pos= new Position(dummyMaze);
+
         if(pos.canMoveForward()){
-                pos.moveForward();
-                path+="F";
-            }
+            pos.moveForward();
+            path+="F";
+        }
         while(pos.getCurrRow()!=endRow|| pos.getCurrColumn()!=(pos.getWidth()-1)){
             if(pos.canTurnRight()){
                 pos.turnRight();
@@ -62,6 +58,7 @@ public class FindPath{
     public String findFactorizedPath(){
         String path = findCanonicalPath();
         String[] path_arr= path.split("");
+        String strFactorizedPath="";
         if(path_arr.length==0){
             return "";
         }
@@ -85,6 +82,7 @@ public class FindPath{
             }   
         }
 
+        //if move is only repeated once, only the move is printed. repetition variable is ignored as "1F" is less factorized than "F"
         if(repetition>1){
             strFactorizedPath+= repetition + path_arr[path_arr.length - 1];
         }

@@ -14,9 +14,8 @@ public class CheckPath{
         this.dir= new Direction(dummyMaze);
     }
 
-    //Converts and returns user input path in canonical form, and strips all whitespace fro inputted apth
+    //Converts and returns user input path in canonical form, and strips all whitespace fro inputted path
     public ArrayList<String> convertUserPath(String userPath){
-
         //strips whitespace from user input path
         String path = userPath.replaceAll("\\s", "");
         String[] path_arr= path.split("");
@@ -39,34 +38,34 @@ public class CheckPath{
         return canonicalPath;
     }
 
-    //outputs string message verifying if user input path is correct or not
-    
-    public String checkPath(){
 
+    //outputs string message verifying if user input path is correct or not 
+    public String checkPath(){
         //if no path is inputted
         if (userPath.equals("")){
-            return "no input path";
+            return "";
         }
-
         ArrayList<String> path= convertUserPath(userPath);
        
-
         int currColumn=0;
         int currRow= dummyMaze.findEntryTile();
-        
         int endRow = dummyMaze.findExitTile();
-        int width= dummyMaze.getWidth();
 
+        int width= dummyMaze.getWidth();
         int height = dummyMaze.getHeight();
-        System.out.println(dummyMaze.getTile(currRow,currColumn));
 
         int index=0;
         while(currColumn<=(width-1) && currColumn>=0 && currRow>=0 && currRow<=(height-1) && index<path.size()){
+
+                //if current tile is a wall, this automatically means that the path is incorrect
+                //terminates path check immediately
                 if(dummyMaze.getTile(currRow,currColumn).equals("WALL ")){
                     return "incorrect path";
                 }
+
                 if(path.get(index).equals("F")){
-                
+                    //moves user forward based on the direction they are currently facing
+                    //adjusts current position in the maze accordingly
                     if(dir.getDirection().equals("east")){
                         currColumn+=1;
                     }
@@ -80,16 +79,20 @@ public class CheckPath{
                         currRow-=1;
                     }
                 }
+                
+                //turns user left
                 else if((path.get(index).equals("L"))){
                     turnLeft();
                 }
-                else{
+
+                //turns user right
+                else if((path.get(index).equals("R"))){
                     turnRight();
                 }
             index+=1;
         }
         
-        System.out.println("Current Row: " + currRow + "End Row: " + (endRow) + "Current Column: " + currColumn + "    "  + "End Column: " + (width-1) );
+        //checks if final position is the maze's exit tile
         if(currRow==(endRow) && currColumn==(width-1) && index==path.size()){
                 return "correct path";
         }
@@ -99,6 +102,7 @@ public class CheckPath{
     }
 
 
+    //turns user right by changing the direction they are facing based on their current direction
     public void turnRight(){
         String direction= dir.getDirection();
         if(direction.equals("east")){
@@ -116,6 +120,7 @@ public class CheckPath{
     }
 
 
+    //turns user left by changing the direction they are facing based on their current direction
     public void turnLeft(){
         String direction= dir.getDirection();
         if(direction.equals("east")){

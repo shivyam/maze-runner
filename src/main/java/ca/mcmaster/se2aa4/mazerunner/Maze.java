@@ -68,6 +68,7 @@ public class Maze{
         return 0;
     }
 
+    //to help visualize the maze when debugging
     public void printMaze(){
         for (int i=0; i<maze.size(); i++) {
             ArrayList<String> row = new ArrayList<String>(maze.get(i));

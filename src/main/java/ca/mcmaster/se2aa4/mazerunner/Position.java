@@ -32,6 +32,8 @@ public class Position{
         return currColumn;
     }
 
+
+    //checks if the tile to the right of current position is not a wall
     public boolean canTurnRight(){
         String direction= dir.getDirection();
         if(direction.equals("east")){
@@ -57,6 +59,8 @@ public class Position{
         return false;
     }
 
+
+    //checks if the tile to the left of current position is not a wall
     public boolean canTurnLeft(){
         String direction= dir.getDirection();
         if(direction.equals("east")){
@@ -82,6 +86,8 @@ public class Position{
         return false;
     }
 
+
+    //turns user right by changing the direction they are facing based on their current direction
     public void turnRight(){
         String direction= dir.getDirection();
         if(direction.equals("east")){
@@ -100,6 +106,7 @@ public class Position{
     }
 
 
+    //turns user left by changing the direction they are facing based on their current direction
     public void turnLeft(){
         String direction= dir.getDirection();
         if(direction.equals("east")){
@@ -116,6 +123,8 @@ public class Position{
         }  
     }
 
+
+    //checks if the tile ahead of current position is not a wall
     public boolean canMoveForward(){
         String direction= dir.getDirection();
    
@@ -146,6 +155,7 @@ public class Position{
         return false;
     }
 
+    //moves user forward by updated their column or row value
     public void moveForward(){
         String direction= dir.getDirection();
         if(direction.equals("north")){

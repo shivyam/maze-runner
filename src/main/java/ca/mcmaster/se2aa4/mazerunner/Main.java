@@ -31,15 +31,15 @@ public class Main {
                 for (int idx = 0; idx < line.length(); idx++) {
                 
                     if (line.charAt(idx) == '#') {
-                        System.out.print("WALL ");
+                        //System.out.print("WALL ");
                         row.add("WALL ");
                     } else if (line.charAt(idx) == ' ') {
-                        System.out.print("PASS ");
+                        //System.out.print("PASS ");
                         row.add("PASS ");
                     }
                 
                 }
-                System.out.print(System.lineSeparator());
+                //System.out.print(System.lineSeparator());
                 userMaze.add(row);
             }
             
@@ -47,9 +47,14 @@ public class Main {
                 FindPath path= new FindPath(mazeTest);
                 CheckPath check= new CheckPath(mazeTest, userPath);
                 logger.info("**** Computing path");
-                logger.info("Path: " + path.findFactorizedPath());
-                logger.info(mazeTest.findEntryTile());
-                logger.info("Verify User Path: " + check.checkPath());
+                if((userPath.equals(""))){
+                    logger.info("Path: " + path.findFactorizedPath());
+                }
+                else{
+                    logger.info("Verify User Path: " + check.checkPath());
+                }
+                
+                
                 logger.info("** End of MazeRunner");
         } 
         catch (IOException e) { 
