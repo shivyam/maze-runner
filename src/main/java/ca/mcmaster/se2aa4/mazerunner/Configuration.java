@@ -15,7 +15,6 @@ public record Configuration(String inputFilePath, String userPath){
     private static final Logger logger = LogManager.getLogger();
 
     public static Configuration load(String[] args){
-        logger.info("** Starting Maze Runner");
         Options options = new Options();
         options.addOption("i", true, "input maze filepath");
         options.addOption("p", true, "user path guess");
@@ -34,7 +33,6 @@ public record Configuration(String inputFilePath, String userPath){
             }
             return new Configuration(inputFilePath, userPath);
         }
-
         catch (ParseException e) {
             throw new RuntimeException(e);
         } 

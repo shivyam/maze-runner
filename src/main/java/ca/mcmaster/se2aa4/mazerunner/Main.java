@@ -17,11 +17,10 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<ArrayList<String>> userMaze = new ArrayList<ArrayList<String>>();
         Configuration config= Configuration.load(args);
-        System.out.println(config);
+        
         String inputFilePath= config.inputFilePath();
         String userPath= config.userPath();
         try{
-            logger.info("**** Reading the maze from file " + inputFilePath);
             BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
             String line;
             
@@ -29,33 +28,24 @@ public class Main {
                 ArrayList<String> row = new ArrayList<String>();
 
                 for (int idx = 0; idx < line.length(); idx++) {
-                
                     if (line.charAt(idx) == '#') {
-                        //System.out.print("WALL ");
                         row.add("WALL ");
                     } else if (line.charAt(idx) == ' ') {
-                        //System.out.print("PASS ");
                         row.add("PASS ");
-                    }
-                
+                    }  
                 }
-                //System.out.print(System.lineSeparator());
                 userMaze.add(row);
             }
             
                 Maze mazeTest= new Maze(userMaze);
                 FindPath path= new FindPath(mazeTest);
                 CheckPath check= new CheckPath(mazeTest, userPath);
-                logger.info("**** Computing path");
                 if((userPath.equals(""))){
-                    logger.info("Path: " + path.findFactorizedPath());
+                    logger.info(path.findFactorizedPath());
                 }
                 else{
-                    logger.info("Verify User Path: " + check.checkPath());
+                    logger.info(check.checkPath());
                 }
-                
-                
-                logger.info("** End of MazeRunner");
         } 
         catch (IOException e) { 
             logger.error("Error occured while reading the file: " + e.getMessage());
